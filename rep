@@ -125,7 +125,7 @@ def header(language_1, language_2, language_1_str, language_2_str):
     l1 = int(language_1 / 2)
     l2 = 0
     
-    if language_2 < 2:
+    if language_2 < 2 and language_2_str != None:
         l2 = 2
     else:
         l2 = int(language_2 / 2)
@@ -134,10 +134,10 @@ def header(language_1, language_2, language_1_str, language_2_str):
         BOLD_LIGHT_RED_COLOR()
         print('*', end='')
 
-    
-    for i in range(l2):
-        BOLD_LIGHT_GREEN_COLOR()
-        print('*', end='')
+    if language_2_str != None:
+        for i in range(l2):
+            BOLD_LIGHT_GREEN_COLOR()
+            print('*', end='')
 
     BOLD_YELLOW_COLOR()
     print(' (' + language_1_str + ' ' + language_2_str + ')', end='')
@@ -187,12 +187,15 @@ def content(keyword: str):
     # TODO: Check if is provided. 
     description = (panel.find('p', class_='f4 mt-3').text).strip()
     
+    if description == None:
+        description = 'No description provided.' 
+    
     license = (parse.find('a', class_='muted-link').text).strip()
     
     source_panel = parse.find('div', class_='Details-content--hidden-not-important js-navigation-container js-active-navigation-container d-md-block')
     
     source  = source_panel.find_all('a', class_='js-navigation-open link-gray-dark')
-    source_desc = source_panel.find_all('a', class_='link-gray')        
+    source_desc = parse.find_all('span', attrs={'css-truncate css-truncate-target d-block width-fit'})        
 
     linguist = parse.find_all('a', class_='d-inline-flex flex-items-center flex-nowrap link-gray no-underline text-small mr-3')  
     
@@ -210,7 +213,6 @@ def content(keyword: str):
     print(' ' + star_emoji  + ' ' + removess(star), end='')
     print(' ' + fork_emoji  + '  ' + removess(fork), end='')
     print(' ' + commit_emoji+ ' ' + commits, end='\n')
-    
     
     header(int(re.search(r'\d+', linguist[0].text).group()), int(re.search(r'\d+', linguist[1].text).group()), removess(linguist[0].text), removess(linguist[1].text))
     
@@ -240,13 +242,14 @@ def content(keyword: str):
     
     print('-')
     
+    
     # Directories, files.
     for i in range(len(source)):
         BOLD_CYAN_COLOR()
         print(source[i].text, end='')
         
         BOLD_LIGHT_WHITE_COLOR()
-        print(' : ', source_desc[i].text)
+        print(' : ', removenl(source_desc[i].text))
     
 
 content(append(sys.argv[1]))
