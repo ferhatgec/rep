@@ -200,7 +200,7 @@ def content(keyword: str):
     linguist = parse.find_all('a', class_='d-inline-flex flex-items-center flex-nowrap link-gray no-underline text-small mr-3')  
     
     BOLD_LIGHT_CYAN_COLOR()
-    print(author[:-1], end='')
+    print(removess(author), end='')
     
     LIGHT_BLACK_COLOR()
     print('/', end='')
@@ -219,7 +219,7 @@ def content(keyword: str):
     print('\n' + description + ' [' + license + ']')
     
     if last_commit_message == None:
-        print('Ah, crashed!\n')
+        print('Ah, crashed!')
         sys.exit(0)
         
     BOLD_LIGHT_YELLOW_COLOR()
