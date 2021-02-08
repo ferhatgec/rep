@@ -153,6 +153,12 @@ def removess(string: str):
 
 # Main
 def content(keyword: str):
+    if '/' not in keyword:
+        print('Oops! It seems like a profile.')
+        sys.exit(1)    
+    
+    keyword = append(keyword)
+    
     html_content = requests.get(keyword, headers=headers).text
     parse = BeautifulSoup(html_content, "lxml")
     
@@ -252,4 +258,5 @@ def content(keyword: str):
         print(' : ', removenl(source_desc[i].text))
     
 
-content(append(sys.argv[1]))
+if len(sys.argv) == 2:
+    content(sys.argv[1])
