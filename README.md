@@ -1,10 +1,12 @@
-# Fegeya Rep
-## Fegeya Rep, CLI-based, colorized GitHub repository reader?
+# This project is no longer maintained.
+
+## Fegeya Rep
+### Fegeya Rep, CLI-based, colorized GitHub repository reader?
 
 ![ferhatgec/rep 👁️  1 ⭐ 1 ⎇  0](resources/window.png)
 
-### Required:
+#### Required:
   * BeautifulSoup4
   * Requests
   
-### Fegeya Rep, licensed under the terms of MIT License.
+#### Fegeya Rep, licensed under the terms of MIT License.
